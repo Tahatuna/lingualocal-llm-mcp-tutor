@@ -1,0 +1,201 @@
+[
+ {
+  "text": "I have been looking forward to this trip for months.",
+  "must": [
+   "aylardır"
+  ]
+ },
+ {
+  "text": "She has been working here since three years",
+  "must": [
+   "çalış",
+   "üç yıl"
+  ]
+ },
+ {
+  "text": "I am agree with you but he dont know nothing about it",
+  "must": [
+   "katıl",
+   "bilm"
+  ]
+ },
+ {
+  "text": "Could you give me a hand with these boxes?",
+  "must": [
+   "yardım"
+  ]
+ },
+ {
+  "text": "It's raining cats and dogs, so we'd better stay in.",
+  "must": [
+   "yağmur"
+  ]
+ },
+ {
+  "text": "If I had known you were coming, I would have baked a cake.",
+  "must": [
+   "bilseydim",
+   "pasta"
+  ]
+ },
+ {
+  "text": "He gave up smoking two years ago.",
+  "must": [
+   "sigara",
+   "bırak"
+  ]
+ },
+ {
+  "text": "I'm used to getting up early.",
+  "must": [
+   "alış",
+   "erken"
+  ]
+ },
+ {
+  "text": "Don't worry, it's not a big deal.",
+  "must": [
+   "merak",
+   "önemli"
+  ]
+ },
+ {
+  "text": "The meeting has been postponed until next week.",
+  "must": [
+   "toplantı",
+   "ertelen"
+  ]
+ },
+ {
+  "text": "Yarın sabah erkenden toplantıya gitmem gerekiyor.",
+  "must": [
+   "meeting",
+   "early",
+   "tomorrow"
+  ]
+ },
+ {
+  "text": "Bu akşam sinemaya gitmek ister misin?",
+  "must": [
+   "tonight"
+  ]
+ },
+ {
+  "text": "Keşke daha önce söyleseydin.",
+  "must": [
+   "wish",
+   "told"
+  ]
+ },
+ {
+  "text": "Kolay gelsin!",
+  "must": []
+ },
+ {
+  "text": "Geçmiş olsun, umarım çabuk iyileşirsin.",
+  "must": [
+   "better",
+   "soon"
+  ]
+ },
+ {
+  "text": "Üç yıldır İngilizce öğreniyorum ama hâlâ konuşurken zorlanıyorum.",
+  "must": [
+   "three years",
+   "still"
+  ]
+ },
+ {
+  "text": "Bu konuyu daha sonra konuşalım mı?",
+  "must": [
+   "later"
+  ]
+ },
+ {
+  "text": "Toplantı yarına ertelendi.",
+  "must": [
+   "postponed",
+   "tomorrow"
+  ]
+ },
+ {
+  "text": "Afiyet olsun.",
+  "must": []
+ },
+ {
+  "text": "Onu görür görmez tanıdım.",
+  "must": [
+   "as soon as",
+   "recogni"
+  ]
+ },
+ {
+  "text": "She quit smoking last year.",
+  "must": [
+   "sigarayı"
+  ]
+ },
+ {
+  "text": "Could you tell me how to get to the train station?",
+  "must": [
+   "tren",
+   "istasyon"
+  ]
+ },
+ {
+  "text": "I ran into an old friend at the supermarket yesterday.",
+  "must": [
+   "karşılaştım",
+   "eski"
+  ]
+ },
+ {
+  "text": "You should have told me earlier.",
+  "must": [
+   "söyle"
+  ]
+ },
+ {
+  "text": "The kids are looking after the neighbour's cat this week.",
+  "must": [
+   "kedi"
+  ]
+ },
+ {
+  "text": "Bu kitabı okumanı kesinlikle tavsiye ederim.",
+  "must": [
+   "recommend",
+   "book"
+  ]
+ },
+ {
+  "text": "Hafta sonu arkadaşlarımla kamp yapmayı planlıyoruz.",
+  "must": [
+   "weekend",
+   "camp"
+  ]
+ },
+ {
+  "text": "Annem bu akşam yemek yapmayacağını söyledi.",
+  "must": [
+   "mother",
+   "cook"
+  ]
+ },
+ {
+  "text": "Eğer yağmur yağmazsa pikniğe gideceğiz.",
+  "must": [
+   "if",
+   "rain",
+   "picnic"
+  ]
+ },
+ {
+  "text": "Toplantıya geç kaldığım için özür dilerim.",
+  "must": [
+   "sorry",
+   "late",
+   "meeting"
+  ]
+ }
+]
