@@ -1,0 +1,30 @@
+#!/bin/bash
+# Start / stop Language Services (http://127.0.0.1:8770). Started at login by a LaunchAgent (scripts/install-login).
+#
+#   lsctl start | stop | restart | status | logs
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+PORT="${LS_PORT:-8770}"
+PY="$ROOT/.venv/bin/python"
+LOG="$HOME/Library/Logs/Language Services.log"
+LABEL="local.language-services"
+
+healthy() { curl -sf -m 2 "http://127.0.0.1:${PORT}/v1/voices" -H "Host: localhost:${PORT}" 2>/dev/null | grep -q '"engine"'; }
+agent() { launchctl print "gui/$(id -u)/$LABEL" >/dev/null 2>&1; }
+
+case "${1:-status}" in
+  start)
+    if healthy; then echo "Running at http://localhost:$PORT"; exit 0; fi
+    if agent; then launchctl kickstart "gui/$(id -u)/$LABEL"
+    else cd "$ROOT" && nohup "$PY" server.py >> "$LOG" 2>&1 & fi
+    for _ in $(seq 1 40); do healthy && { echo "Running at http://localhost:$PORT"; exit 0; }; sleep 0.25; done
+    echo "Did not start. Last lines of $LOG:" >&2; tail -n 20 "$LOG" >&2; exit 1 ;;
+  stop)
+    if agent; then launchctl kill TERM "gui/$(id -u)/$LABEL"; echo "Stopped (the LaunchAgent starts it again at login)"
+    else pkill -f "$ROOT/server.py" || true; pkill -f "^$PY server.py" || true; echo "Stopped"; fi ;;
+  restart) "$0" stop; sleep 1; "$0" start ;;
+  status) if healthy; then echo "Running at http://localhost:$PORT"; else echo "Not running"; exit 3; fi ;;
+  logs) tail -n 50 -F "$LOG" ;;
+  *) echo "usage: $0 {start|stop|restart|status|logs}" >&2; exit 2 ;;
+esac
