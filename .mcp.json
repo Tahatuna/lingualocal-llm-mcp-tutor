@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "language-services": {
+      "type": "stdio",
+      "command": "language-services/.venv/bin/python",
+      "args": ["language-services/mcp_server.py"],
+      "env": { "LS_URL": "http://127.0.0.1:8770" }
+    }
+  }
+}
