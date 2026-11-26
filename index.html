@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinguaLocal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <span class="brand">LinguaLocal</span>
+  <div class="prefs">
+    <div class="seg" id="accentSeg" role="group" aria-label="English accent">
+      <button type="button" data-accent="us" aria-pressed="true">US</button>
+      <button type="button" data-accent="uk" aria-pressed="false">UK</button>
+    </div>
+    <button type="button" class="btn small" id="chatBtn" aria-controls="chat" aria-expanded="false" aria-pressed="false">Teacher<span class="hide-sm"> chat</span></button>
+    <div class="seg" id="speedSeg" role="group" aria-label="Speaking speed">
+      <button type="button" data-speed="1" aria-pressed="true">1×</button>
+      <button type="button" data-speed="0.75" aria-pressed="false">0.75×</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side" aria-label="History and saved">
+    <section class="side-sec">
+      <div class="side-head">
+        <h2>History <span class="count" id="histCount"></span></h2>
+        <button type="button" class="link" id="histClear" hidden>Clear</button>
+      </div>
+      <ol id="histList" class="list"></ol>
+      <p class="empty" id="histEmpty">Every word and sentence you look up stays here until you clear it.</p>
+    </section>
+    <section class="side-sec">
+      <div class="side-head">
+        <h2>Saved</h2>
+        <div class="seg small" id="savedSeg" role="group" aria-label="Saved">
+          <button type="button" data-kind="word" aria-pressed="true">Words <span class="count" id="savedWordsN"></span></button>
+          <button type="button" data-kind="sentence" aria-pressed="false">Sentences <span class="count" id="savedSentN"></span></button>
+        </div>
+      </div>
+      <ol id="savedList" class="list"></ol>
+      <p class="empty" id="savedEmpty">Press Save on a word or a sentence to keep it here.</p>
+    </section>
+  </aside>
+
+  <main class="main">
+    <form class="box" id="box" role="search">
+      <label class="sr" for="input">Word or sentence, English or Turkish</label>
+      <textarea id="input" rows="2" maxlength="1000" placeholder="Type or say a word or a sentence — English or Turkish" autocomplete="off" spellcheck="true"></textarea>
+      <div class="box-bar">
+        <select class="dir-sel" id="dirSel" aria-label="Translation direction" title="The language is detected by itself; choose a direction to override it">
+          <option value="auto">Auto</option>
+          <option value="en">EN → TR</option>
+          <option value="tr">TR → EN</option>
+        </select>
+        <button type="button" class="tog" id="autoSay" aria-pressed="false" title="Say each word aloud when you look it up (sentences are not said)">Say words</button>
+        <span class="bar-gap"></span>
+        <button type="button" class="icon" id="hearInput" aria-label="Listen to the text" title="Listen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+        </button>
+        <button type="button" class="icon mic" id="mic" aria-pressed="false" aria-label="Speak. Shift+click keeps the microphone on." title="Speak — stops when you pause. Right-click or Shift+click: keep the microphone on">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+        <button type="submit" class="go">Go</button>
+      </div>
+    </form>
+    <p class="status" id="status" aria-live="polite"></p>
+
+    <section class="result" id="result" aria-label="Translation" hidden>
+      <div class="tr-head">
+        <span class="lang" id="trLang">Turkish</span>
+        <span class="badge" id="trSource"></span>
+      </div>
+      <p class="tr-out" id="trOut"></p>
+      <div class="tools">
+        <button type="button" class="btn" id="trHear"><span class="play" aria-hidden="true"></span>Listen</button>
+        <button type="button" class="btn" id="trCopy">Copy</button>
+        <button type="button" class="btn" id="trSave" aria-pressed="false">Save</button>
+        <button type="button" class="btn rec" id="trTest"><span class="dot" aria-hidden="true"></span><span class="lbl">Test my pronunciation</span></button>
+      </div>
+      <div class="pron" id="trPron" aria-live="polite" hidden></div>
+      <div id="checkBox"></div>
+      <div id="variantsBox"></div>
+      <div class="keywords" id="keywords" hidden></div>
+    </section>
+
+    <article class="card" id="card" aria-live="polite" hidden></article>
+  </main>
+
+  <aside class="chat" id="chat" aria-label="English teacher chat" hidden>
+    <div class="chat-head">
+      <h2>Teacher <span class="badge ai" title="Answers come from the local language model">AI</span></h2>
+      <div class="chat-actions">
+        <button type="button" class="link" id="chatNew">New chat</button>
+        <button type="button" class="x" id="chatClose" aria-label="Close the teacher chat">×</button>
+      </div>
+    </div>
+    <div class="chat-bar">
+      <label class="sr" for="chatPick">Chat</label>
+      <select id="chatPick" class="chat-pick"></select>
+      <input id="chatTitle" class="chat-title" maxlength="80" aria-label="Chat name" hidden>
+      <button type="button" class="x" id="chatMore" aria-label="Chat actions" aria-haspopup="menu" aria-expanded="false" aria-controls="chatMenu">⋯</button>
+      <div class="cm-menu" id="chatMenu" role="menu" aria-label="Chat actions" hidden>
+        <button type="button" role="menuitem" data-act="rename">Rename chat</button>
+        <button type="button" role="menuitem" data-act="quiz">Quiz me on my saved words</button>
+        <button type="button" role="menuitem" data-act="delete" class="danger">Delete chat…</button>
+      </div>
+    </div>
+    <div class="chat-log" id="chatLog" role="log" aria-live="polite"></div>
+    <form class="chat-form" id="chatForm">
+      <label class="sr" for="chatInput">Message to your teacher</label>
+      <textarea id="chatInput" rows="1" maxlength="1000" placeholder="Ask your teacher…" autocomplete="off" spellcheck="true"></textarea>
+      <button type="submit" class="go">Send</button>
+    </form>
+  </aside>
+</div>
+
+<footer class="keys">
+  <span><kbd>/</kbd> type</span>
+  <span><kbd>Enter</kbd> go</span>
+  <span><kbd>Shift</kbd>+<kbd>Enter</kbd> new line</span>
+  <span><kbd>Esc</kbd> stop the microphone</span>
+  <span class="credit">Dictionaries: Oxford (macOS) · Examples: Tatoeba CC BY 2.0 FR · Voices: Kokoro, macOS</span>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
