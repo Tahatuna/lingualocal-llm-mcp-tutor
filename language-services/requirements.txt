@@ -1,0 +1,7 @@
+# Language Services: Python packages (Python 3.13, macOS on Apple silicon). Install into .venv:
+#   python3 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt
+kokoro-onnx==0.6.1      # natural English voice (Kokoro v1.0, ONNX)
+onnxruntime==1.32.0     # runs the voice model
+lemminflect==0.2.3      # verb and noun forms
+soundfile==0.14.0       # writes the voice to WAV
+wordfreq==3.1.1         # how common a word is

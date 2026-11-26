@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Voice model files (large, downloaded at setup: see README)
+language-services/models/
+
+# Dictionary entries from the Oxford dictionaries licensed with macOS (made locally by tests/make_fixtures.py)
+language-services/tests/fixtures/dict_*.json
+
+# Editors and local agent settings (the project skill is kept)
+.idea/
+.vscode/
+*.swp
+.claude/*
+!.claude/skills/
+
+# Secrets and local settings (none are needed; see .env.example)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
